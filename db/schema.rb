@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_27_121555) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_27_142809) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,17 +25,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_121555) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.text "content"
-    t.float "rating"
-    t.bigint "offer_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["offer_id"], name: "index_comments_on_offer_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
   create_table "offers", force: :cascade do |t|
     t.string "brand"
     t.string "model"
@@ -45,6 +34,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_121555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.float "rating"
+    t.bigint "offer_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offer_id"], name: "index_reviews_on_offer_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_121555) do
 
   add_foreign_key "bookings", "offers"
   add_foreign_key "bookings", "users"
-  add_foreign_key "comments", "offers"
-  add_foreign_key "comments", "users"
   add_foreign_key "offers", "users"
+  add_foreign_key "reviews", "offers"
+  add_foreign_key "reviews", "users"
 end
