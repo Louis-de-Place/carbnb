@@ -1,9 +1,97 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'date'
+
+User.delete_all
+
+users = [
+  { first_name: 'John', last_name: 'Doe', birth_date: Date.new(1980, 1, 1), rating: 3.5, email: 'john.doe@example.com', password: 'password123' },
+  { first_name: 'Jane', last_name: 'Doe', birth_date: Date.new(1990, 2, 1), rating: 4.2, email: 'jane.doe@example.com', password: 'password123' },
+  { first_name: 'Alice', last_name: 'Smith', birth_date: Date.new(1985, 3, 1), rating: 4.8, email: 'alice.smith@example.com', password: 'password123' },
+  { first_name: 'Bob', last_name: 'Johnson', birth_date: Date.new(1975, 4, 1), rating: 2.9, email: 'bob.johnson@example.com', password: 'password123' },
+  { first_name: 'Carlos', last_name: 'Garcia', birth_date: Date.new(1982, 5, 1), rating: 4.4, email: 'carlos.garcia@example.com', password: 'password123' },
+  { first_name: 'Diana', last_name: 'Martinez', birth_date: Date.new(1988, 6, 1), rating: 4.7, email: 'diana.martinez@example.com', password: 'password123' },
+  { first_name: 'Ewa', last_name: 'Hernandez', birth_date: Date.new(1983, 7, 1), rating: 3.3, email: 'ewa.hernandez@example.com', password: 'password123' },
+  { first_name: 'François', last_name: 'Lopez', birth_date: Date.new(1979, 8, 1), rating: 4.1, email: 'francois.lopez@example.com', password: 'password123' },
+  { first_name: 'Giorgio', last_name: 'Wilson', birth_date: Date.new(1981, 9, 1), rating: 4.9, email: 'giorgio.wilson@example.com', password: 'password123' },
+  { first_name: 'Hana', last_name: 'Anderson', birth_date: Date.new(1987, 10, 1), rating: 3.6, email: 'hana.anderson@example.com', password: 'password123' },
+  { first_name: 'Igor', last_name: 'Thomas', birth_date: Date.new(1976, 11, 1), rating: 4.3, email: 'igor.thomas@example.com', password: 'password123' },
+  { first_name: 'Jasmine', last_name: 'Taylor', birth_date: Date.new(1989, 12, 1), rating: 4.8, email: 'jasmine.taylor@example.com', password: 'password123' },
+  { first_name: 'Ken', last_name: 'Moore', birth_date: Date.new(1984, 1, 1), rating: 2.5, email: 'ken.moore@example.com', password: 'password123' },
+  { first_name: 'Lina', last_name: 'Jackson', birth_date: Date.new(1978, 2, 1), rating: 4.2, email: 'lina.jackson@example.com', password: 'password123' },
+  { first_name: 'Marta', last_name: 'Martin', birth_date: Date.new(1986, 3, 1), rating: 3.9, email: 'marta.martin@example.com', password: 'password123' },
+  { first_name: 'Nils', last_name: 'Lee', birth_date: Date.new(1980, 4, 1), rating: 4.7, email: 'nils.lee@example.com', password: 'password123' },
+  { first_name: 'Olga', last_name: 'Perez', birth_date: Date.new(1983, 5, 1), rating: 2.8, email: 'olga.perez@example.com', password: 'password123' },
+  { first_name: 'Pedro', last_name: 'Thompson', birth_date: Date.new(1977, 6, 1), rating: 4.4, email: 'pedro.thompson@example.com', password: 'password123' },
+  { first_name: 'Quinn', last_name: 'White', birth_date: Date.new(1982, 7, 1), rating: 3.2, email: 'quinn.white@example.com', password: 'password123' },
+  { first_name: 'Rita', last_name: 'Harris', birth_date: Date.new(1979, 8, 1), rating: 4.5, email: 'rita.harris@example.com', password: 'password123' },
+  { first_name: 'Sam', last_name: 'Sanchez', birth_date: Date.new(1981, 9, 1), rating: 2.9, email: 'sam.sanchez@example.com', password: 'password123' },
+  { first_name: 'Tina', last_name: 'Clark', birth_date: Date.new(1984, 10, 1), rating: 4.3, email: 'tina.clark@example.com', password: 'password123' },
+  { first_name: 'Ugo', last_name: 'Ramirez', birth_date: Date.new(1978, 11, 1), rating: 4.7, email: 'ugo.ramirez@example.com', password: 'password123' },
+  { first_name: 'Vera', last_name: 'Lewis', birth_date: Date.new(1987, 12, 1), rating: 3.4, email: 'vera.lewis@example.com', password: 'password123' },
+  { first_name: 'Wang', last_name: 'Robinson', birth_date: Date.new(1980, 1, 1), rating: 4.1, email: 'wang.robinson@example.com', password: 'password123' },
+  { first_name: 'Xia', last_name: 'Walker', birth_date: Date.new(1985, 2, 1), rating: 4.6, email: 'xia.walker@example.com', password: 'password123' },
+  { first_name: 'Yuki', last_name: 'Young', birth_date: Date.new(1976, 3, 1), rating: 2.7, email: 'yuki.young@example.com', password: 'password123' },
+  { first_name: 'Zara', last_name: 'Allen', birth_date: Date.new(1988, 4, 1), rating: 4.2, email: 'zara.allen@example.com', password: 'password123' },
+  { first_name: 'John', last_name: 'Doe', birth_date: Date.new(1980, 1, 1), rating: 3.5, email: 'john.doe2@example.com', password: 'password123' },
+  { first_name: 'Jane', last_name: 'Doe', birth_date: Date.new(1990, 2, 1), rating: 4.2, email: 'jane.doe2@example.com', password: 'password123' },
+  { first_name: 'Alice', last_name: 'Smith', birth_date: Date.new(1985, 3, 1), rating: 4.8, email: 'alice.smith2@example.com', password: 'password123' },
+  { first_name: 'Bob', last_name: 'Johnson', birth_date: Date.new(1975, 4, 1), rating: 2.9, email: 'bob.johnson2@example.com', password: 'password123' },
+]
+
+users.each do |user|
+  User.create!(user)
+end
+
+offers = [
+  { brand: 'Ford', model: 'Mustang', year: 1967, km: 120_000, user: User.first },
+  { brand: 'Chevrolet', model: 'Camaro', year: 1969, km: 80_000, user: User.second },
+  { brand: 'Dodge', model: 'Charger', year: 1970, km: 90_000, user: User.third },
+  { brand: 'Ferrari', model: '308 GTS', year: 1978, km: 50_000, user: User.fourth },
+  { brand: 'Porsche', model: '911', year: 1985, km: 70_000, user: User.fifth },
+  { brand: 'BMW', model: 'M3', year: 1988, km: 60_000, user: User.find_by(email: 'ewa.hernandez@example.com') },
+  { brand: 'Mercedes-Benz', model: '190E', year: 1990, km: 110_000, user: User.find_by(email: 'francois.lopez@example.com') },
+  { brand: 'Jaguar', model: 'E-Type', year: 1965, km: 40_000, user: User.find_by(email: 'giorgio.wilson@example.com') },
+  { brand: 'Toyota', model: 'Supra', year: 1994, km: 100_000, user: User.find_by(email: 'hana.anderson@example.com') },
+  { brand: 'Nissan', model: 'Skyline GT-R', year: 1995, km: 95_000, user: User.find_by(email: 'igor.thomas@example.com') },
+  { brand: 'Mazda', model: 'RX-7', year: 1993, km: 85_000, user: User.find_by(email: 'jasmine.taylor@example.com') },
+  { brand: 'Ford', model: 'Thunderbird', year: 1957, km: 150_000, user: User.find_by(email: 'ken.moore@example.com') },
+  { brand: 'Chevrolet', model: 'Corvette', year: 1963, km: 65_000, user: User.find_by(email: 'lina.jackson@example.com') },
+  { brand: 'Volkswagen', model: 'Beetle', year: 1972, km: 130_000, user: User.find_by(email: 'marta.martin@example.com') },
+  { brand: 'Fiat', model: '500', year: 1967, km: 55_000, user: User.find_by(email: 'nils.lee@example.com') },
+  { brand: 'Lamborghini', model: 'Countach', year: 1982, km: 40_000, user: User.find_by(email: 'olga.perez@example.com') },
+  { brand: 'Alfa Romeo', model: 'Spider', year: 1974, km: 75_000, user: User.find_by(email: 'pedro.thompson@example.com') },
+  { brand: 'Aston Martin', model: 'DB5', year: 1964, km: 50_000, user: User.find_by(email: 'quinn.white@example.com') },
+  { brand: 'Maserati', model: 'Ghibli', year: 1970, km: 45_000, user: User.find_by(email: 'rita.harris@example.com') },
+  { brand: 'Lotus', model: 'Esprit', year: 1987, km: 60_000, user: User.find_by(email: 'sam.sanchez@example.com') },
+  { brand: 'Renault', model: '5 Turbo', year: 1980, km: 85_000, user: User.find_by(email: 'tina.clark@example.com') },
+  { brand: 'Peugeot', model: '205 GTI', year: 1987, km: 95_000, user: User.find_by(email: 'ugo.ramirez@example.com') },
+  { brand: 'Citroën', model: '2CV', year: 1970, km: 110_000, user: User.find_by(email: 'vera.lewis@example.com') },
+  { brand: 'Saab', model: '900 Turbo', year: 1986, km: 105_000, user: User.find_by(email: 'wang.robinson@example.com') },
+  { brand: 'Volvo', model: 'P1800', year: 1964, km: 90_000, user: User.find_by(email: 'xia.walker@example.com') },
+  { brand: 'Honda', model: 'NSX', year: 1991, km: 70_000, user: User.find_by(email: 'yuki.young@example.com') },
+  { brand: 'Subaru', model: 'Impreza WRX', year: 1999, km: 120_000, user: User.find_by(email: 'zara.allen@example.com') },
+  { brand: 'Mitsubishi', model: 'Lancer Evo', year: 1998, km: 115_000, user: User.find_by(email: 'john.doe2@example.com') },
+  { brand: 'Acura', model: 'Integra', year: 1997, km: 100_000, user: User.find_by(email: 'jane.doe2@example.com') },
+  { brand: 'Ferrari', model: 'F40', year: 1989, km: 40_000, user: User.find_by(email: 'alice.smith2@example.com') },
+  { brand: 'McLaren', model: 'F1', year: 1995, km: 30_000, user: User.find_by(email: 'bob.johnson2@example.com') },
+  { brand: 'Bugatti', model: 'EB110', year: 1991, km: 25_000, user: User.find_by(email: 'john.doe@example.com') },
+  { brand: 'Rolls-Royce', model: 'Silver Shadow', year: 1975, km: 80_000, user: User.find_by(email: 'jane.doe@example.com') },
+  { brand: 'Bentley', model: 'Continental', year: 1955, km: 100_000, user: User.find_by(email: 'alice.smith@example.com') },
+  { brand: 'Cadillac', model: 'Eldorado', year: 1959, km: 150_000, user: User.find_by(email: 'bob.johnson@example.com') },
+  { brand: 'Lincoln', model: 'Continental', year: 1961, km: 140_000, user: User.find_by(email: 'carlos.garcia@example.com') },
+  { brand: 'Oldsmobile', model: '442', year: 1968, km: 85_000, user: User.find_by(email: 'diana.martinez@example.com') },
+  { brand: 'Pontiac', model: 'GTO', year: 1966, km: 90_000, user: User.find_by(email: 'ewa.hernandez@example.com') },
+  { brand: 'Plymouth', model: 'Barracuda', year: 1971, km: 70_000, user: User.find_by(email: 'francois.lopez@example.com') },
+  { brand: 'AMC', model: 'Javelin', year: 1970, km: 110_000, user: User.find_by(email: 'giorgio.wilson@example.com') },
+  { brand: 'Datsun', model: '240Z', year: 1971, km: 65_000, user: User.find_by(email: 'hana.anderson@example.com') },
+  { brand: 'Triumph', model: 'TR6', year: 1974, km: 95_000, user: User.find_by(email: 'igor.thomas@example.com') },
+  { brand: 'MG', model: 'MGB', year: 1965, km: 120_000, user: User.find_by(email: 'jasmine.taylor@example.com') },
+  { brand: 'Austin', model: 'Mini Cooper', year: 1967, km: 100_000, user: User.find_by(email: 'ken.moore@example.com') },
+  { brand: 'DeLorean', model: 'DMC-12', year: 1981, km: 50_000, user: User.find_by(email: 'lina.jackson@example.com') },
+  { brand: 'Lancia', model: 'Stratos', year: 1974, km: 55_000, user: User.find_by(email: 'marta.martin@example.com') },
+  { brand: 'Iso', model: 'Grifo', year: 1972, km: 60_000, user: User.find_by(email: 'nils.lee@example.com') },
+  { brand: 'Shelby', model: 'Cobra', year: 1966, km: 30_000, user: User.find_by(email: 'olga.perez@example.com') },
+]
+
+offers.each do |offer|
+  Offer.create!(offer)
+end
