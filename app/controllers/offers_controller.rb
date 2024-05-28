@@ -1,10 +1,10 @@
 class OffersController < ApplicationController
+  before_action :set_offer, only: [:show, :destroy]
   def index
     @offers = Offer.all
   end
 
   def show
-    @offer = Offer.find(params[:id])
   end
 
   def new
@@ -12,11 +12,12 @@ class OffersController < ApplicationController
   end
 
   def create
-    @offer = Offer.new(params[:offer])
+    @offer = Offer.new(offer_params)
+    @offer.user = current_user
     if @offer.save
-      redirect_to offer_path(@offer), notice: 'Offer was successfully created.'
+      redirect_to offer_path(@offer)
     else
-      render :new, alert: 'There was an error creating the offer.'
+      redirect_to new_offer_path, status: :unprocessable_entity
     end
   end
 
@@ -27,12 +28,15 @@ class OffersController < ApplicationController
   end
 
   def destroy
-    @offer = Offer.find(params[:id])
     @offer.destroy
-    redirect_to offer_path, status: :see_other
+    redirect_to root_path, status: :see_other
   end
 
   private
+
+  def set_offer
+    @offer = Offer.find(params[:id])
+  end
 
   def offer_params
     params.require(:offer).permit(:brand, :model, :year, :km, :price, :title)
