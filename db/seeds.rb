@@ -1,7 +1,6 @@
 require 'date'
 
 User.delete_all
-Offer.delete_all
 
 users = [
   { first_name: 'John', last_name: 'Doe', birth_date: Date.new(1980, 1, 1), rating: 3.5, email: 'john.doe@example.com', password: 'password123' },
