@@ -1,2 +1,23 @@
-<h1>Offers#new</h1>
-<p>Find me in app/views/offers/new.html.erb</p>
+<div class="container">
+  <h1>Post my car to rent</h1>
+  <br>
+  <div class="form-wrapper">
+
+      <%= simple_form_for [@offer] do |f| %>
+        <div class="d-flex gap-4">
+          <%= f.input :brand, label: "Brand", wrapper_html: { class: "flex-grow-1" } %>
+          <%= f.input :model, label: "Model", wrapper_html: { class: "flex-grow-1" } %>
+        </div>
+        <div class="d-flex gap-4">
+          <%= f.input :year, label: "Year", wrapper_html: { class: "flex-grow-1" } %>
+          <%= f.input :km, label: "Km", wrapper_html: { class: "flex-grow-1" } %>
+        </div>
+          <%= f.input :price, label: "Price in $"%>
+          <%= f.input :image, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
+        <%= f.submit "Post my car to rent", class: "btn btn-dark" %>
+      <% end %>
+
+     <%= link_to "Back to the list of offers", offers_path, class: "btn btn-grey"%>
+
+  </div>
+</div>
