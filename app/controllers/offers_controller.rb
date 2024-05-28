@@ -5,6 +5,7 @@ class OffersController < ApplicationController
   end
 
   def show
+    @review = Review.new
   end
 
   def new
@@ -39,6 +40,6 @@ class OffersController < ApplicationController
   end
 
   def offer_params
-    params.require(:offer).permit(:brand, :model, :year, :km, :price, :title)
+    params.require(:offer).permit(:brand, :model, :year, :km, :price, :title, photos: [])
   end
 end
