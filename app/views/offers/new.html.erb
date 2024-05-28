@@ -3,7 +3,8 @@
   <br>
   <div class="form-wrapper">
 
-      <%= simple_form_for [@offer] do |f| %>
+      <%= simple_form_for @offer do |f| %>
+        <%= f.input :title, label: "Title", wrapper_html: { class: "flex-grow-1" } %>
         <div class="d-flex gap-4">
           <%= f.input :brand, label: "Brand", wrapper_html: { class: "flex-grow-1" } %>
           <%= f.input :model, label: "Model", wrapper_html: { class: "flex-grow-1" } %>
@@ -13,7 +14,7 @@
           <%= f.input :km, label: "Km", wrapper_html: { class: "flex-grow-1" } %>
         </div>
           <%= f.input :price, label: "Price in $"%>
-          <%= f.input :image, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
+          <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
         <%= f.submit "Post my car to rent", class: "btn btn-dark" %>
       <% end %>
 

@@ -4,5 +4,5 @@ class Offer < ApplicationRecord
   has_many :bookings
   validates :title, :price, :brand, :model, :year, :km, presence: true
 
-  has_one_attached :photo
+  has_many_attached :photos
 end
