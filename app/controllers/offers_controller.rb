@@ -6,6 +6,14 @@ class OffersController < ApplicationController
 
   def show
     @review = Review.new
+    @booking = Booking.new
+    @bookings = @offer.bookings
+    @bookings_dates = @bookings.map do |booking|
+      {
+        from: booking.start_date,
+        to: booking.end_date
+      }
+    end
   end
 
   def new
