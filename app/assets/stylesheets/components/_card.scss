@@ -48,3 +48,23 @@
     }
   }
 }
+
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  width: 339px;
+
+  .calendar-button {
+    color: #fff;
+    width: 100%;
+    background-color: #569ff7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 8px;
+  }
+}
