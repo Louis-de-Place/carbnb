@@ -2,6 +2,12 @@ class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :destroy]
   def index
     @offers = Offer.all
+    @markers = @offers.geocoded.map do |offer|
+      {
+        lat: offer.latitude,
+        lng: offer.longitude
+      }
+    end
   end
 
   def show
