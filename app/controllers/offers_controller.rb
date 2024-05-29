@@ -40,6 +40,6 @@ class OffersController < ApplicationController
   end
 
   def offer_params
-    params.require(:offer).permit(:brand, :model, :year, :km, :price, :title, photos: [])
+    params.require(:offer).permit(:brand, :model, :year, :km, :price, :address, :description, :availability_end, :availability_start, photos: [])
   end
 end
