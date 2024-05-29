@@ -17,9 +17,11 @@
       <% end %>
     </div>
     <div class="col-8">
-      <div class="mb-4">
-        <i class="fa-solid fa-star"></i> <%= @offer.reviews.average(:rating) %>
-      </div>
+      <% if @offer.reviews.count > 0 %>
+        <div class="mb-4">
+          <i class="fa-solid fa-star"></i> <%= @offer.reviews.average(:rating) %>
+        </div>
+      <% end %>
       <div class="d-flex gap-4 py-4 border-top">
         <%= cl_image_tag(@offer.user.photo.attached? ? @offer.user.photo.key : "default_pfp", class: "avatar-large", crop: :fill) %>
         <div>
@@ -31,6 +33,7 @@
           </div>
         </div>
       </div>
+      <p class="text-start"><%= @offer.description %></p>
     </div>
     <div class="col">
       <h4>Rent this car:</h4>
