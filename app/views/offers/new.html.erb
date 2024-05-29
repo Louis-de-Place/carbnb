@@ -3,19 +3,17 @@
   <br>
   <div class="form-wrapper">
     <%= simple_form_for @offer do |f| %>
-      <%= f.input :title, label: "Title", wrapper_html: { class: "flex-grow-1" } %>
-      <div class="d-flex gap-4">
-        <%= f.input :brand, label: "Brand", wrapper_html: { class: "flex-grow-1" } %>
-        <%= f.input :model, label: "Model", wrapper_html: { class: "flex-grow-1" } %>
-      </div>
-      <div class="d-flex gap-4">
-        <%= f.input :year, label: "Year", wrapper_html: { class: "flex-grow-1" } %>
-        <%= f.input :km, label: "Km", wrapper_html: { class: "flex-grow-1" } %>
-      </div>
-      <%= f.input :price, label: "Price in $"%>
-      <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
-      <%= f.submit "Post my car to rent", class: "btn btn-dark" %>
-    <% end %>
-    <%= link_to "Back to the list of offers", offers_path, class: "btn btn-grey"%>
-  </div>
+      <%= f.input :brand, label: "Brand", wrapper_html: { class: "flex-grow-1" } %>
+      <%= f.input :model, label: "Model", wrapper_html: { class: "flex-grow-1" } %>
+    </div>
+    <div class="d-flex gap-4">
+      <%= f.input :year, label: "Year", wrapper_html: { class: "flex-grow-1" } %>
+      <%= f.input :km, label: "Km", wrapper_html: { class: "flex-grow-1" } %>
+    </div>
+    <%= f.input :price, label: "Price in $"%>
+    <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
+    <%= f.submit "Post my car to rent", class: "btn btn-dark" %>
+  <% end %>
+  <%= link_to "Back to the list of offers", offers_path, class: "btn btn-grey"%>
+</div>
 </div>
