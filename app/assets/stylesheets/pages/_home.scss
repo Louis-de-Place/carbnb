@@ -1,1 +1,19 @@
-// Specific CSS for your home-page
+.logo {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+
+  img {
+    height: 80px;
+  }
+}
+.carousel {
+  height: calc(100vh - 100px);
+  .carousel-img {
+    object-fit: cover;
+    object-position: bottom;
+  }
+}
+
+$carousel-transition-duration: 3.6s;
+$carousel-transition: transform $carousel-transition-duration ease-in-out;

@@ -2,6 +2,9 @@ class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :destroy]
   def index
     @offers = Offer.all
+    @offers = @offers.where(brand: params[:brand]) if params[:brand].present?
+    @offers = @offers.where(year: params[:year]) if params[:year].present?
+    @offers = @offers.where(["price < '%s'", params[:price]]) if params[:price].present?
     @markers = @offers.geocoded.map do |offer|
       {
         lat: offer.latitude,
