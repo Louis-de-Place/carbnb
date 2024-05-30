@@ -1,0 +1,11 @@
+<%= simple_form_for [@offer, @booking], html: { data: { controller: 'datepicker' } } do |f| %>
+  <%= f.input :start_date,
+      as: :string,
+      input_html: { data: {datepicker_target: "startDateInput"}, class: "d-none" },
+      label: false %>
+  <%= f.input :end_date,
+      as: :string,
+      input_html: { data: {datepicker_target: "endDateInput"}, class: "d-none" },
+      label: false %>
+  <%= f.button :submit, "Rent the car", class: "button calendar-button" %>
+<% end %>

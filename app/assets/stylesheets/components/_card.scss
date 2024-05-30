@@ -35,16 +35,30 @@
 
       .card-price {
         font-size: 14px;
-        color: rgb(0, 0, 0);
       }
 
       .card-title {
         margin-bottom: 10px;
         font-size: 15px;
         font-weight: bold;
-        color: black;
         text-align: left;
       }
     }
+  }
+}
+
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  width: 339px;
+
+  .calendar-button {
+    width: 100%;
+    padding: 8px;
   }
 }

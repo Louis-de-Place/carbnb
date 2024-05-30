@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-75">
   <div class="row gy-5">
     <div class="col-12">
       <h2><%= @offer.brand %> - <%= @offer.model %></h2>
@@ -17,37 +17,37 @@
       <% end %>
     </div>
     <div class="col-8">
-      <% if @offer.reviews.count > 0 %>
-        <div class="mb-4">
-          <i class="fa-solid fa-star"></i> <%= @offer.reviews.average(:rating) %>
-        </div>
-      <% end %>
-      <div class="d-flex gap-4 py-4 border-top">
-        <%= cl_image_tag(@offer.user.photo.attached? ? @offer.user.photo.key : "default_pfp", class: "avatar-large", crop: :fill) %>
-        <div>
-          <strong>
-            Owner : <%= @offer.user.first_name %> <%= @offer.user.last_name %>
-          </strong>
+      <div class="py-4 border-top">
+        <% if @offer.reviews.count > 0 %>
+          <div class="pb-3 border-bottom">
+            <i class="fa-solid fa-star"></i> <%= @offer.reviews.average(:rating) %>
+          </div>
+        <% end %>
+        <div class="d-flex pt-3 gap-4 ">
+          <%= cl_image_tag(@offer.user.photo.attached? ? @offer.user.photo.key : "default_pfp", class: "avatar-large", crop: :fill) %>
           <div>
-            <%= Date.today.year - @offer.user.birth_date.year %> years old
+            <strong>
+              Owner : <%= @offer.user.first_name %> <%= @offer.user.last_name %>
+            </strong>
+            <div>
+              <%= Date.today.year - @offer.user.birth_date.year %> years old
+            </div>
           </div>
         </div>
       </div>
-      <p class="text-start"><%= @offer.description %></p>
+      <p class="text-justify"><%= @offer.description %></p>
     </div>
     <div class="col">
-      <h4>Rent this car:</h4>
-      <%= simple_form_for [@offer, @booking], html: { data: { controller: 'datepicker' } } do |f| %>
-        <%= f.input :start_date,
-            as: :string,
-            input_html: { data: {datepicker_target: "startDateInput"}, class: "d-none" },
-            label: false %>
-        <%= f.input :end_date,
-            as: :string,
-            input_html: { data: {datepicker_target: "endDateInput"}, class: "d-none" },
-            label: false %>
-        <%= f.button :submit, "Book", class: "btn btn-primary" %>
-      <% end %>
+      <div class="calendar-card">
+        <div class="d-flex align-items-center gap-1">
+          <h4 id="price"><%= @offer.price %></h4><h4>$ </h4><h6>per day</h6>
+        </div>
+        <div class="mb-4">
+          <%= render "offers/calendar_form" %>
+        </div>
+        <div id="result">
+        </div>
+      </div>
     </div>
     <div class="col-6">
       <div>

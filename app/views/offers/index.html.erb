@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="car-cards">
-      <% @offers.each do |offer| %>
+      <% @offers.reverse.each do |offer| %>
         <%= link_to offer_path(offer), class: "text-decoration-none text-dark" do %>
           <div class="card-trip">
             <div class="image-container">
