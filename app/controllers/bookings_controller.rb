@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
     @booking.offer = @offer
     @booking.user = current_user
     if @booking.save
-      redirect_to success_path
+      redirect_to offers_path, notice: "Congrats! Your booking is saved."
     else
       render 'offers/show', status: :unprocessable_entity
     end
