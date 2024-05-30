@@ -18,5 +18,6 @@ div:has(~ div > .form-check-input:hover) > label .fa-star {
 }
 
 .fa-star {
+  color: $main;
   transition: color 100ms;
 }
