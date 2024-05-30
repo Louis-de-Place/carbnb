@@ -14,11 +14,14 @@
       <%= f.input :price, label: "Price in $"%>
       <%= f.input :address,
         input_html: {data: {address_autocomplete_target: "address"},class: "d-none"},
-        wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
-      %>
+        wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}%>
       <%= f.input :description, as: :text, label: "Description"%>
-      <%= f.input :availability_start, as: :date, label: "availability start"%>
-      <%= f.input :availability_end, as: :date, label: "availability end"%>
+      <%= f.input :availability_start,
+          as: :string,
+          input_html: { data: { controller: "new-datepicker", new_datepicker_target: "availabilityStartInput" } } %>
+      <%= f.input :availability_end,
+          as: :string,
+          input_html: { data: { controller: "new-datepicker", new_datepicker_target: "availabilityEndInput" } }%>
       <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
       <%= f.submit "Post my car to rent", class: "button" %>
     <% end %>

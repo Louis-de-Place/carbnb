@@ -16,9 +16,12 @@ export default class extends Controller {
         var dateEnd = new Date(date[1]);
         var timeDifference = dateEnd.getTime() - dateStart.getTime();
         var days = Math.floor(timeDifference / (1000 * 3600 * 24)) + 1;
-        document.getElementById("result").innerHTML =
-          `<div class="text-start pb-2 border-bottom">Number of days: ${days}</div>
-          <div class="text-start mt-1" id="result">Total price: ${days * price} $</div>`;
+        document.getElementById(
+          "result"
+        ).innerHTML = `<div class="text-start pb-2 border-bottom">Number of days: ${days}</div>
+          <div class="text-start mt-1" id="result">Total price: ${
+            days * price
+          } $</div>`;
       },
     });
   }
