@@ -5,7 +5,9 @@ class OffersController < ApplicationController
     @markers = @offers.geocoded.map do |offer|
       {
         lat: offer.latitude,
-        lng: offer.longitude
+        lng: offer.longitude,
+        info_window_html: render_to_string(partial: "info_windows", locals: { offer: }),
+        marker_html: render_to_string(partial: "marker")
       }
     end
   end
