@@ -1,6 +1,6 @@
 <div class=logo> <%= link_to image_tag("carbnb.png", class: "img-responsive center-block", height: "80px") %></div>
 
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="false">
+<div class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="false">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <%= image_tag "img_1.jpg", class:"carousel-img d-block w-100", height: 600%>
@@ -17,6 +17,6 @@
   </div>
 
   <div class="d-grid gap-2 col-2 mx-auto my-4">
-    <%= link_to "Discover our cars", offers_path, class:"btn btn-dark", type:"button"  %>
+    <%= link_to "Discover our cars", offers_path, class:"button", type:"button"  %>
   </div>
 </div>

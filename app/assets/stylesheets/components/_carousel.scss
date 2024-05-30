@@ -4,28 +4,19 @@
   // height: 80px;
   margin-bottom: 10px;
 }
+.carousel {
+  h1 {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+  }
 
-// button {
-//   position: relative;
-//   margin-top: 10px;
-// }
-
-.btn-dark {
-  border-radius: 8px !important;
-  $border-radius-lg: .25rem;
-  font-size: 20px;
-  background-color: $main;
-}
-
-.btn-dark:hover {
-  border-radius: 8px;
-  font-size: 20px;
-  background-color: $hover;
-}
-
-.carousel-img {
-  object-fit: cover;
-  object-position: bottom;
+  .carousel-img {
+    object-fit: cover;
+    object-position: bottom;
+  }
 }
 
 $carousel-transition-duration: 3.6s;

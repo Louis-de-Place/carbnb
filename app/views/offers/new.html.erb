@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-75">
   <h1>Post my car to rent</h1>
   <br>
   <div class="form-wrapper">
@@ -17,8 +17,7 @@
       <%= f.input :availability_start, as: :date, label: "availability start"%>
       <%= f.input :availability_end, as: :date, label: "availability end"%>
       <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
-      <%= f.submit "Post my car to rent", class: "btn btn-dark" %>
+      <%= f.submit "Post my car to rent", class: "button" %>
     <% end %>
-    <%= link_to "Back to the list of offers", offers_path, class: "btn btn-grey"%>
   </div>
 </div>
