@@ -21,13 +21,13 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-      const customMarker = document.createElement("div")
-      customMarker.innerHTML = marker.marker_html
-      new mapboxgl.Marker(customMarker)
-      .setLngLat([marker.lng, marker.lat])
-      .setPopup(popup)
-      .addTo(this.map)
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
+      const customMarker = document.createElement("div");
+      customMarker.innerHTML = marker.marker_html;
+      new mapboxgl.Marker(customMarker, { offset: [0, -20] })
+        .setLngLat([marker.lng, marker.lat])
+        .setPopup(popup)
+        .addTo(this.map);
     });
   }
   #fitMapToMarkers() {

@@ -1,8 +1,8 @@
-<div class="container w-75 " data-controller="toggle">
-  <div class="mt-5 text-center">
-    <button data-action="click->toggle#fire" class="btn btn-outline-primary">
-      <span data-toggle-target="buttonText">View on map</span>
-    </button>
+<div class="container w-75" data-controller="toggle">
+  <div class="mb-3 text-center">
+    <a type="button" data-action="click->toggle#fire" class="button" data-toggle-target="buttonText">
+      View on map
+    </a>
     <div data-toggle-target="togglableElement" class="disapear">
       <%= render "map" %>
     </div>
