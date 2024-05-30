@@ -23,7 +23,7 @@ body {
 }
 
 .container-75 {
-  @extend .container;
+  @extend .container !optional;
   padding: 32px 0;
   width: 75%;
 }
