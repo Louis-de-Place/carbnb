@@ -1,7 +1,7 @@
 <div class="container-75">
-  <h1>Post my car to rent</h1>
-  <br>
   <div class="form-wrapper">
+    <h1 class="text-center bold">Post my car to rent</h1>
+    <br>
     <%= simple_form_for @offer do |f| %>
       <div class="d-flex gap-4">
         <%= f.input :brand, label: "Brand", wrapper_html: { class: "flex-grow-1" } %>
@@ -11,19 +11,68 @@
         <%= f.input :year, label: "Year", wrapper_html: { class: "flex-grow-1" } %>
         <%= f.input :km, label: "Km", wrapper_html: { class: "flex-grow-1" } %>
       </div>
-      <%= f.input :price, label: "Price in $"%>
+      <%= f.input :price, label: "Price in $" %>
       <%= f.input :address,
-        input_html: {data: {address_autocomplete_target: "address"},class: "d-none"},
-        wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}%>
-      <%= f.input :description, as: :text, label: "Description"%>
-      <%= f.input :availability_start,
+        input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+        wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}} %>
+      <%= f.input :description, as: :text, label: "Description" %>
+      <div class="d-flex gap-4">
+        <%= f.input :availability_start,
           as: :string,
-          input_html: { data: { controller: "new-datepicker", new_datepicker_target: "availabilityStartInput" } } %>
-      <%= f.input :availability_end,
+          input_html: { data: { controller: "new-datepicker", new_datepicker_target: "availabilityStartInput" } },
+          wrapper_html: { class: "flex-grow-1" } %>
+        <%= f.input :availability_end,
           as: :string,
-          input_html: { data: { controller: "new-datepicker", new_datepicker_target: "availabilityEndInput" } }%>
-      <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true } %>
-      <%= f.submit "Post my car to rent", class: "button" %>
+          input_html: { data: { controller: "new-datepicker", new_datepicker_target: "availabilityEndInput" } },
+          wrapper_html: {class: "flex-grow-1"}%>
+      </div>
+      <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true, onchange: "previewImages(event)" } %>
+      <div id="photos-preview" class="d-flex gap-4 flex-wrap mt-4"></div>
+      <div class="d-flex justify-content-center">
+        <%= f.button :submit, "Post my car to rent", class: "button w-100" %>
+      </div>
     <% end %>
   </div>
 </div>
+
+<script>
+  function previewImages(event) {
+    var previewContainer = document.getElementById('photos-preview');
+    previewContainer.innerHTML = '';
+    var files = event.target.files;
+
+    if (files) {
+      Array.from(files).forEach((file, index) => {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var imgContainer = document.createElement('div');
+          imgContainer.classList.add('image-preview-container');
+          imgContainer.setAttribute('data-index', index);
+
+          var img = document.createElement('img');
+          img.src = e.target.result;
+          img.classList.add('preview-image');
+
+          var deleteButton = document.createElement('button');
+          deleteButton.innerHTML = '&times;';
+          deleteButton.classList.add('delete-button');
+          deleteButton.setAttribute('data-index', index);
+          deleteButton.onclick = function() { deleteImage(index); };
+
+          imgContainer.appendChild(img);
+          imgContainer.appendChild(deleteButton);
+          previewContainer.appendChild(imgContainer);
+        }
+        reader.readAsDataURL(file);
+      });
+    }
+  }
+
+  function deleteImage(index) {
+    var previewContainer = document.getElementById('photos-preview');
+    var imgContainer = previewContainer.querySelector(`.image-preview-container[data-index="${index}"]`);
+    if (imgContainer) {
+      imgContainer.remove();
+    }
+  }
+</script>
