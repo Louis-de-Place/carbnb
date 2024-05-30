@@ -8,12 +8,12 @@ export default class extends Controller {
   }
 
   fire() {
-    this.togglableElementTarget.classList.toggle("d-none");
+    this.togglableElementTarget.classList.toggle("disapear");
     this.updateButtonText();
   }
 
   updateButtonText() {
-    if (this.togglableElementTarget.classList.contains("d-none")) {
+    if (this.togglableElementTarget.classList.contains("disapear")) {
       this.buttonTextTarget.textContent = "View on map";
     } else {
       this.buttonTextTarget.textContent = "View on list";
