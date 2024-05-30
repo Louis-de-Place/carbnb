@@ -1,3 +1,12 @@
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  img {
+    height: 80px;
+  }
+}
 .carousel {
   h1 {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
@@ -12,3 +21,6 @@
     object-position: bottom;
   }
 }
+
+$carousel-transition-duration: 3.6s;
+$carousel-transition: transform $carousel-transition-duration ease-in-out;
