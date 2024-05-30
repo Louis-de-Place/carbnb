@@ -1,5 +1,5 @@
-<div class="container w-75">
-  <div data-controller="toggle" class="mt-5 text-center">
+<div class="container w-75 " data-controller="toggle">
+  <div class="mt-5 text-center">
     <button data-action="click->toggle#fire" class="btn btn-outline-primary">
       <span data-toggle-target="buttonText">View on map</span>
     </button>
@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="car-cards">
+    <div class="car-cards" data-toggle-target="cards">
       <% @offers.reverse.each do |offer| %>
         <%= link_to offer_path(offer), class: "text-decoration-none text-dark" do %>
           <div class="card-trip">
