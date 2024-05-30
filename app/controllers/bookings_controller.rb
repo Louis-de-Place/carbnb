@@ -7,6 +7,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to offers_path, notice: "Congrats! Your booking is saved."
     else
+      flash.now[:alert] = "Oups, something went wrong."
       render 'offers/show', status: :unprocessable_entity
     end
   end

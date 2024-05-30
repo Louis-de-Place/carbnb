@@ -34,7 +34,7 @@ class OffersController < ApplicationController
     if @offer.save
       redirect_to offer_path(@offer), notice: "Congrats! Your offer is online."
     else
-      redirect_to new_offer_path, status: :unprocessable_entity
+      redirect_to new_offer_path, alert: "Failed. Fill in all fields *"
     end
   end
 
