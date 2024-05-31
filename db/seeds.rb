@@ -260,6 +260,7 @@ offers.each_with_index do |offer, index|
     model: offer[:model],
     year: offer[:year],
     price: offer[:price],
+    description: offer[:description],
     km: 30_000,
     user: index < 11 ? User.second : User.first,
     address: addresses[index],
