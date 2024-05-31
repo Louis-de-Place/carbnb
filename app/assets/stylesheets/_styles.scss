@@ -1,5 +1,9 @@
 @import "config/colors";
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
@@ -15,6 +19,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 0.375rem 0.75rem;
     text-decoration: none;
+    border: none;
 
     &:hover {
       font-weight: 500;

@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-lewagon">
+<div class="navbar sticky-top navbar-expand-sm navbar-lewagon">
   <div class="container-fluid px-5">
     <%= link_to root_path, class: "navbar-logo" do %>
       <%= image_tag "carbnb.png" %>
@@ -16,7 +16,7 @@
         <div>
           <li class="nav-item dropdown">
             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="100,200">
-              <%= image_tag "https://images.motorsportstats.com/large/driverProfilePicture/driverProfilePicture-8d5486d9-c622-4961-9f6e-9bb5b3ed14e1.jpg", class: "avatar-large" %>
+              <%= cl_image_tag(current_user.photo.attached? ? current_user.photo.key : "default_pfp", class: "avatar-large", crop: :fill) %>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><%= link_to "My Dashboard", "#", class: "dropdown-item" %></li>

@@ -1,0 +1,35 @@
+<div class="side-bar sticky-top">
+  <div class="switch">
+    <input id="status"
+          type="checkbox"
+          name="status"
+          data-action="click->toggle#fire">
+    <label for="status">
+      <div class="status-switch"
+          data-unchecked="List"
+          data-checked="Map">
+      </div>
+    </label>
+  </div>
+  <%= form_with url: offers_path, method: :get, class:"filters" do %>
+    <%= select_tag :brand, options_for_select(Offer.all.sort_by(&:brand).pluck(:brand).uniq, params[:brand]), class:"form-select", include_blank: "Brand" %>
+    <%= select_tag :year, options_for_select(Offer.all.sort_by(&:year).pluck(:year).uniq, params[:year]), class:"form-select", include_blank: "Year" %>
+    <%= range_field_tag :price,
+      params[:price],
+      in: 100..20000,
+      step: 100,
+      value: 20000,
+      id: 'price',
+      class: "w-100 form-range"
+    %>
+    <div class="d-flex align-items-center gap-3">
+      Price:
+      <%= text_field_tag :price,
+            params[:price],
+            class: "form-control",
+            id: "value"
+        %>
+    </div>
+    <%= submit_tag "Filter", name: "", class: "button w-100" %>
+  <% end %>
+</div>

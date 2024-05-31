@@ -1,0 +1,26 @@
+<div class="car-cards" >
+  <% @offers.reverse.each do |offer| %>
+    <%= link_to offer_path(offer), class: "text-decoration-none text-dark" do %>
+      <div class="card-trip">
+        <div class="image-container" >
+          <% if offer.photos.attached? %>
+            <%= cl_image_tag(offer.photos.first.key, class: "") %>
+          <% else %>
+            <%= cl_image_tag("default_photo") %>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title justify-content"><%= offer.brand %> - <%= offer.model %></h5>
+          <div class="card-info d-flex justify-content-between">
+            <p class="card-price">$<%= offer.price %>/day</p>
+            <% if offer.reviews.count > 0 %>
+              <div>
+                <i class="fa-solid fa-star"></i> <%= offer.reviews.average(:rating) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,6 +1,6 @@
 .car-cards {
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 24px;
   grid-template-columns: repeat(3, minmax(100px, 1fr));
 }
 .card-trip {
@@ -10,7 +10,10 @@
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 
   &:hover {
     transform: translateY(-10px);
@@ -30,6 +33,7 @@
 }
 
 .card-body {
+  flex: 0;
   padding: 16px 16px 0 16px;
 
   .card-price {

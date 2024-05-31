@@ -1,7 +1,11 @@
 <%= link_to offer_path(offer), class: "text-decoration-none text-dark" do %>
   <div>
     <div class="image-container">
-      <img src="https://images.unsplash.com/photo-1587750059638-e7e8c43b99fc?q=80&w=3538&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" height="100" alt="" class="object-fit-cover">
+      <% if offer.photos.attached? %>
+        <%= cl_image_tag(offer.photos.first.key, class: "") %>
+      <% else %>
+        <%= cl_image_tag("default_photo") %>
+      <% end %>
     </div>
     <div class="card-body">
       <p class="card-title justify-content"><%= offer.brand %> - <%= offer.model %></p>

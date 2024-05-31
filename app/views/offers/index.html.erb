@@ -1,34 +1,13 @@
-<div class="container w-75" data-controller="toggle">
-  <div class="mb-3 text-center">
-    <a type="button" data-action="click->toggle#fire" class="button" data-toggle-target="buttonText">
-      View on map
-    </a>
-    <div data-toggle-target="togglableElement" class="disapear">
+<div class="d-flex py-4" data-controller="toggle filter">
+  <div class="col-2 border-end px-2">
+    <%= render "filters" %>
+  </div>
+  <div class="mx-auto col-9 row">
+    <div data-toggle-target="map" class="disapear">
       <%= render "map" %>
     </div>
-  </div>
-  <div class="row">
-    <div class="car-cards" data-toggle-target="cards">
-      <% @offers.reverse.each do |offer| %>
-        <%= link_to offer_path(offer), class: "text-decoration-none text-dark" do %>
-          <div class="card-trip">
-            <div class="image-container">
-              <img src="https://images.unsplash.com/photo-1587750059638-e7e8c43b99fc?q=80&w=3538&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" height="250" alt="" class="object-fit-cover">
-            </div>
-            <div class="card-body">
-              <h5 class="card-title justify-content"><%= offer.brand %> - <%= offer.model %></h5>
-              <div class="card-info d-flex justify-content-between">
-                <p class="card-price">$<%= offer.price %>/day</p>
-                <% if offer.reviews.count > 0 %>
-                  <div>
-                    <i class="fa-solid fa-star"></i> <%= offer.reviews.average(:rating) %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+    <div data-toggle-target="list">
+      <%= render "cards" %>
     </div>
   </div>
 </div>
