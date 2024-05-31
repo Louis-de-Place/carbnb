@@ -11,6 +11,18 @@
     color: $main;
   }
 
+  a {
+    color: $main;
+  }
+
+  a:hover {
+    color: $hover
+  }
+
+  .nav-link {
+    color: $main;
+  }
+
   .navbar-logo img {
     width: 80px;
   }
