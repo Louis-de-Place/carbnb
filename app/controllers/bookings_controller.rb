@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
     @booking.offer = @offer
     @booking.user = current_user
     if @booking.save
-      redirect_to offers_path, notice: "Congrats! Your booking is saved."
+      redirect_to dashboard_path, notice: "Congrats! Your booking is saved."
     else
       flash.now[:alert] = "Oops, something went wrong."
       render 'offers/show', status: :unprocessable_entity

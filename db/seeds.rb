@@ -1,99 +1,318 @@
 require 'date'
+require 'cloudinary'
+require 'open-uri'
 
 Offer.delete_all
 User.delete_all
 
 users = [
+  { first_name: 'Thomas', last_name: 'Mascheretti', birth_date: Date.new(1990, 3, 11), rating: 4.8, email: 'admin@admin.com', password: 'admin123'},
   { first_name: 'John', last_name: 'Doe', birth_date: Date.new(1980, 1, 1), rating: 3.5, email: 'john.doe@example.com', password: 'password123' },
-  { first_name: 'Jane', last_name: 'Doe', birth_date: Date.new(1990, 2, 1), rating: 4.2, email: 'jane.doe@example.com', password: 'password123' },
-  { first_name: 'Alice', last_name: 'Smith', birth_date: Date.new(1985, 3, 1), rating: 4.8, email: 'alice.smith@example.com', password: 'password123' },
-  { first_name: 'Bob', last_name: 'Johnson', birth_date: Date.new(1975, 4, 1), rating: 2.9, email: 'bob.johnson@example.com', password: 'password123' },
-  { first_name: 'Carlos', last_name: 'Garcia', birth_date: Date.new(1982, 5, 1), rating: 4.4, email: 'carlos.garcia@example.com', password: 'password123' },
-  { first_name: 'Diana', last_name: 'Martinez', birth_date: Date.new(1988, 6, 1), rating: 4.7, email: 'diana.martinez@example.com', password: 'password123' },
-  { first_name: 'Ewa', last_name: 'Hernandez', birth_date: Date.new(1983, 7, 1), rating: 3.3, email: 'ewa.hernandez@example.com', password: 'password123' },
-  { first_name: 'François', last_name: 'Lopez', birth_date: Date.new(1979, 8, 1), rating: 4.1, email: 'francois.lopez@example.com', password: 'password123' },
-  { first_name: 'Giorgio', last_name: 'Wilson', birth_date: Date.new(1981, 9, 1), rating: 4.9, email: 'giorgio.wilson@example.com', password: 'password123' },
-  { first_name: 'Hana', last_name: 'Anderson', birth_date: Date.new(1987, 10, 1), rating: 3.6, email: 'hana.anderson@example.com', password: 'password123' },
-  { first_name: 'Igor', last_name: 'Thomas', birth_date: Date.new(1976, 11, 1), rating: 4.3, email: 'igor.thomas@example.com', password: 'password123' },
-  { first_name: 'Jasmine', last_name: 'Taylor', birth_date: Date.new(1989, 12, 1), rating: 4.8, email: 'jasmine.taylor@example.com', password: 'password123' },
-  { first_name: 'Ken', last_name: 'Moore', birth_date: Date.new(1984, 1, 1), rating: 2.5, email: 'ken.moore@example.com', password: 'password123' },
-  { first_name: 'Lina', last_name: 'Jackson', birth_date: Date.new(1978, 2, 1), rating: 4.2, email: 'lina.jackson@example.com', password: 'password123' },
-  { first_name: 'Marta', last_name: 'Martin', birth_date: Date.new(1986, 3, 1), rating: 3.9, email: 'marta.martin@example.com', password: 'password123' },
-  { first_name: 'Nils', last_name: 'Lee', birth_date: Date.new(1980, 4, 1), rating: 4.7, email: 'nils.lee@example.com', password: 'password123' },
-  { first_name: 'Olga', last_name: 'Perez', birth_date: Date.new(1983, 5, 1), rating: 2.8, email: 'olga.perez@example.com', password: 'password123' },
-  { first_name: 'Pedro', last_name: 'Thompson', birth_date: Date.new(1977, 6, 1), rating: 4.4, email: 'pedro.thompson@example.com', password: 'password123' },
-  { first_name: 'Quinn', last_name: 'White', birth_date: Date.new(1982, 7, 1), rating: 3.2, email: 'quinn.white@example.com', password: 'password123' },
-  { first_name: 'Rita', last_name: 'Harris', birth_date: Date.new(1979, 8, 1), rating: 4.5, email: 'rita.harris@example.com', password: 'password123' },
-  { first_name: 'Sam', last_name: 'Sanchez', birth_date: Date.new(1981, 9, 1), rating: 2.9, email: 'sam.sanchez@example.com', password: 'password123' },
-  { first_name: 'Tina', last_name: 'Clark', birth_date: Date.new(1984, 10, 1), rating: 4.3, email: 'tina.clark@example.com', password: 'password123' },
-  { first_name: 'Ugo', last_name: 'Ramirez', birth_date: Date.new(1978, 11, 1), rating: 4.7, email: 'ugo.ramirez@example.com', password: 'password123' },
-  { first_name: 'Vera', last_name: 'Lewis', birth_date: Date.new(1987, 12, 1), rating: 3.4, email: 'vera.lewis@example.com', password: 'password123' },
-  { first_name: 'Wang', last_name: 'Robinson', birth_date: Date.new(1980, 1, 1), rating: 4.1, email: 'wang.robinson@example.com', password: 'password123' },
-  { first_name: 'Xia', last_name: 'Walker', birth_date: Date.new(1985, 2, 1), rating: 4.6, email: 'xia.walker@example.com', password: 'password123' },
-  { first_name: 'Yuki', last_name: 'Young', birth_date: Date.new(1976, 3, 1), rating: 2.7, email: 'yuki.young@example.com', password: 'password123' },
-  { first_name: 'Zara', last_name: 'Allen', birth_date: Date.new(1988, 4, 1), rating: 4.2, email: 'zara.allen@example.com', password: 'password123' },
-  { first_name: 'John', last_name: 'Doe', birth_date: Date.new(1980, 1, 1), rating: 3.5, email: 'john.doe2@example.com', password: 'password123' },
-  { first_name: 'Jane', last_name: 'Doe', birth_date: Date.new(1990, 2, 1), rating: 4.2, email: 'jane.doe2@example.com', password: 'password123' },
-  { first_name: 'Alice', last_name: 'Smith', birth_date: Date.new(1985, 3, 1), rating: 4.8, email: 'alice.smith2@example.com', password: 'password123' },
-  { first_name: 'Bob', last_name: 'Johnson', birth_date: Date.new(1975, 4, 1), rating: 2.9, email: 'bob.johnson2@example.com', password: 'password123' },
 ]
 
 users.each do |user|
   User.create!(user)
 end
 
+addresses = [
+  "10 Rue de la Paix, 75002 Paris",
+  "52 Rue Mouffetard, 75005 Paris",
+  "25 Rue des Francs Bourgeois, 75004 Paris",
+  "14 Rue de Rivoli, 75001 Paris",
+  "5 Rue de Charonne, 75011 Paris",
+  "42 Rue du Faubourg Saint-Antoine, 75012 Paris",
+  "8 Rue de la Roquette, 75011 Paris",
+  "20 Avenue de la Porte de la Villette, 75019 Paris",
+  "128 Rue La Fayette, 75010 Paris",
+  "15 Rue du Faubourg Montmartre, 75009 Paris",
+  "6 Rue des Archives, 75004 Paris",
+  "45 Rue du Faubourg Saint-Honoré, 75008 Paris",
+  "66 Avenue des Champs-Élysées, 75008 Paris",
+  "30 Avenue des Champs-Élysées, 75008 Paris",
+  "21 Rue du Mont Thabor, 75001 Paris",
+  "7 Rue de la Paix, 75002 Paris",
+  "31 Avenue George V, 75008 Paris",
+  "26 Place Vendôme, 75001 Paris"
+]
+
 offers = [
-    { brand: 'Ford', model: 'Mustang', year: 1967, km: 120_000, user: User.first, price: 350, address: '123 Rue de Rivoli, Paris, France', description: 'Classic car with great history.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Chevrolet', model: 'Camaro', year: 1969, km: 80_000, user: User.second, price: 400, address: '45 Avenue des Frères Lumière, Lyon, France', description: 'Vintage Camaro, well maintained.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Dodge', model: 'Charger', year: 1970, km: 90_000, user: User.third, price: 450, address: '78 Boulevard Michelet, Marseille, France', description: 'Powerful Charger, a true classic.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Ferrari', model: '308 GTS', year: 1978, km: 50_000, user: User.fourth, price: 900, address: '22 Promenade des Anglais, Nice, France', description: 'Luxury Ferrari in excellent condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Porsche', model: '911', year: 1985, km: 70_000, user: User.fifth, price: 700, address: '50 Rue Sainte-Catherine, Bordeaux, France', description: 'Iconic Porsche 911, well preserved.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'BMW', model: 'M3', year: 1988, km: 60_000, user: User.find_by(email: 'ewa.hernandez@example.com'), price: 600, address: '33 Rue Faidherbe, Lille, France', description: 'Classic BMW M3, great performance.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Mercedes-Benz', model: '190E', year: 1990, km: 110_000, user: User.find_by(email: 'francois.lopez@example.com'), price: 550, address: '12 Rue du Vieux Marché aux Poissons, Strasbourg, France', description: 'Reliable 190E, smooth ride.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Jaguar', model: 'E-Type', year: 1965, km: 40_000, user: User.find_by(email: 'giorgio.wilson@example.com'), price: 800, address: '7 Rue de la Fosse, Nantes, France', description: 'Vintage Jaguar, well maintained.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Toyota', model: 'Supra', year: 1994, km: 100_000, user: User.find_by(email: 'hana.anderson@example.com'), price: 500, address: '99 Allées Jean Jaurès, Toulouse, France', description: 'Sporty Supra, great condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Nissan', model: 'Skyline GT-R', year: 1995, km: 95_000, user: User.find_by(email: 'igor.thomas@example.com'), price: 600, address: '4 Rue de Université, Montpellier, France', description: 'Classic GT-R, powerful performance.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Mazda', model: 'RX-7', year: 1993, km: 85_000, user: User.find_by(email: 'jasmine.taylor@example.com'), price: 550, address: '21 Rue Saint-Georges, Rennes, France', description: 'Well-kept RX-7, fun to drive.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Ford', model: 'Thunderbird', year: 1957, km: 150_000, user: User.find_by(email: 'ken.moore@example.com'), price: 700, address: '10 Place du Forum, Reims, France', description: 'Classic Thunderbird, stylish ride.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Chevrolet', model: 'Corvette', year: 1963, km: 65_000, user: User.find_by(email: 'lina.jackson@example.com'), price: 750, address: '3 Quai Southampton, Le Havre, France', description: 'Vintage Corvette, well preserved.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Volkswagen', model: 'Beetle', year: 1972, km: 130_000, user: User.find_by(email: 'marta.martin@example.com'), price: 300, address: '15 Rue des Armuriers, Saint-Étienne, France', description: 'Classic Beetle, reliable car.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Fiat', model: '500', year: 1967, km: 55_000, user: User.find_by(email: 'nils.lee@example.com'), price: 350, address: '27 Rue Jean Jaurès, Toulon, France', description: 'Classic Fiat 500, great condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Lamborghini', model: 'Countach', year: 1982, km: 40_000, user: User.find_by(email: 'olga.perez@example.com'), price: 1200, address: '14 Rue des Arènes, Angers, France', description: 'Iconic Countach, excellent condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Alfa Romeo', model: 'Spider', year: 1974, km: 75_000, user: User.find_by(email: 'pedro.thompson@example.com'), price: 500, address: '8 Rue de la République, Grenoble, France', description: 'Classic Spider, fun convertible.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Aston Martin', model: 'DB5', year: 1964, km: 50_000, user: User.find_by(email: 'quinn.white@example.com'), price: 1000, address: '2 Rue de la Liberté, Dijon, France', description: 'Classic DB5, elegant and powerful.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Maserati', model: 'Ghibli', year: 1970, km: 45_000, user: User.find_by(email: 'rita.harris@example.com'), price: 900, address: '39 Rue de Horloge, Nîmes, France', description: 'Vintage Ghibli, well maintained.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Lotus', model: 'Esprit', year: 1987, km: 60_000, user: User.find_by(email: 'sam.sanchez@example.com'), price: 600, address: '18 Rue de Siam, Brest, France', description: 'Classic Esprit, sporty and sleek.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Renault', model: '5 Turbo', year: 1980, km: 85_000, user: User.find_by(email: 'tina.clark@example.com'), price: 450, address: '42 Rue Jean Jaurès, Limoges, France', description: 'Vintage 5 Turbo, fun to drive.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Peugeot', model: '205 GTI', year: 1987, km: 95_000, user: User.find_by(email: 'ugo.ramirez@example.com'), price: 400, address: '11 Place Gambetta, Amiens, France', description: 'Classic 205 GTI, great condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Citroën', model: '2CV', year: 1970, km: 110_000, user: User.find_by(email: 'vera.lewis@example.com'), price: 300, address: '20 Rue du Faubourg Saint-Antoine, Paris, France', description: 'Classic Citroën 2CV, reliable.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Saab', model: '900 Turbo', year: 1986, km: 105_000, user: User.find_by(email: 'wang.robinson@example.com'), price: 450, address: '6 Rue du Vieux-Port, Marseille, France', description: 'Reliable 900 Turbo, great performance.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Volvo', model: 'P1800', year: 1964, km: 90_000, user: User.find_by(email: 'xia.walker@example.com'), price: 500, address: '34 Rue du Mont Blanc, Grenoble, France', description: 'Vintage P1800, well preserved.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Honda', model: 'NSX', year: 1991, km: 70_000, user: User.find_by(email: 'yuki.young@example.com'), price: 650, address: '28 Avenue Jean Jaurès, Lyon, France', description: 'Sporty NSX, well maintained.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Subaru', model: 'Impreza WRX', year: 1999, km: 120_000, user: User.find_by(email: 'zara.allen@example.com'), price: 500, address: '56 Rue Nationale, Lille, France', description: 'Classic WRX, powerful and fun.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Mitsubishi', model: 'Lancer Evo', year: 1998, km: 115_000, user: User.find_by(email: 'john.doe2@example.com'), price: 550, address: '9 Rue des Fleurs, Nice, France', description: 'Iconic Lancer Evo, well kept.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Acura', model: 'Integra', year: 1997, km: 100_000, user: User.find_by(email: 'jane.doe2@example.com'), price: 450, address: '3 Rue de la Gare, Toulouse, France', description: 'Sporty Integra, reliable and fun.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Ferrari', model: 'F40', year: 1989, km: 40_000, user: User.find_by(email: 'alice.smith2@example.com'), price: 1500, address: '14 Rue des Écoles, Montpellier, France', description: 'Legendary Ferrari F40, excellent.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'McLaren', model: 'F1', year: 1995, km: 30_000, user: User.find_by(email: 'bob.johnson2@example.com'), price: 2000, address: '7 Rue du Faubourg Saint-Honoré, Paris, France', description: 'Rare McLaren F1, top condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Bugatti', model: 'EB110', year: 1991, km: 25_000, user: User.find_by(email: 'john.doe@example.com'), price: 1800, address: '5 Avenue des Champs-Élysées, Paris, France', description: 'Iconic Bugatti EB110, pristine.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Rolls-Royce', model: 'Silver Shadow', year: 1975, km: 80_000, user: User.find_by(email: 'jane.doe@example.com'), price: 800, address: '23 Rue de la Paix, Paris, France', description: 'Luxury Silver Shadow, well kept.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Bentley', model: 'Continental', year: 1955, km: 100_000, user: User.find_by(email: 'alice.smith@example.com'), price: 850, address: '19 Rue du Bac, Paris, France', description: 'Classic Bentley, luxurious ride.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Cadillac', model: 'Eldorado', year: 1959, km: 150_000, user: User.find_by(email: 'bob.johnson@example.com'), price: 750, address: '11 Rue de la Bourse, Lyon, France', description: 'Iconic Eldorado, well maintained.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Lincoln', model: 'Continental', year: 1961, km: 140_000, user: User.find_by(email: 'carlos.garcia@example.com'), price: 700, address: '25 Rue de la République, Marseille, France', description: 'Classic Continental, smooth ride.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Oldsmobile', model: '442', year: 1968, km: 85_000, user: User.find_by(email: 'diana.martinez@example.com'), price: 600, address: '30 Rue Victor Hugo, Nantes, France', description: 'Powerful 442, well preserved.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Pontiac', model: 'GTO', year: 1966, km: 90_000, user: User.find_by(email: 'ewa.hernandez@example.com'), price: 650, address: '17 Rue Franklin, Grenoble, France', description: 'Classic GTO, great condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Plymouth', model: 'Barracuda', year: 1971, km: 70_000, user: User.find_by(email: 'francois.lopez@example.com'), price: 700, address: '14 Place Bellecour, Lyon, France', description: 'Iconic Barracuda, well kept.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'AMC', model: 'Javelin', year: 1970, km: 110_000, user: User.find_by(email: 'giorgio.wilson@example.com'), price: 500, address: '22 Rue de la Paix, Paris, France', description: 'Classic Javelin, reliable performance.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Datsun', model: '240Z', year: 1971, km: 65_000, user: User.find_by(email: 'hana.anderson@example.com'), price: 600, address: '5 Rue de la Monnaie, Lille, France', description: 'Sporty 240Z, great condition.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Triumph', model: 'TR6', year: 1974, km: 95_000, user: User.find_by(email: 'igor.thomas@example.com'), price: 450, address: '10 Avenue Jean Médecin, Nice, France', description: 'Classic TR6, fun to drive.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'MG', model: 'MGB', year: 1965, km: 120_000, user: User.find_by(email: 'jasmine.taylor@example.com'), price: 400, address: '16 Rue des Minimes, Toulouse, France', description: 'Vintage MGB, well maintained.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Austin', model: 'Mini Cooper', year: 1967, km: 100_000, user: User.find_by(email: 'ken.moore@example.com'), price: 350, address: '8 Rue Saint-Dominique, Paris, France', description: 'Classic Mini Cooper, stylish ride.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'DeLorean', model: 'DMC-12', year: 1981, km: 50_000, user: User.find_by(email: 'lina.jackson@example.com'), price: 1000, address: '4 Place Saint-Sulpice, Paris, France', description: 'Legendary DeLorean, excellent.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Lancia', model: 'Stratos', year: 1974, km: 55_000, user: User.find_by(email: 'marta.martin@example.com'), price: 900, address: '29 Rue de Rennes, Paris, France', description: 'Classic Stratos, well preserved.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Iso', model: 'Grifo', year: 1972, km: 60_000, user: User.find_by(email: 'nils.lee@example.com'), price: 850, address: '12 Rue de Rivoli, Paris, France', description: 'Vintage Grifo, stylish and fast.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) },
-    { brand: 'Shelby', model: 'Cobra', year: 1966, km: 30_000, user: User.find_by(email: 'olga.perez@example.com'), price: 1200, address: '6 Rue de Seine, Paris, France', description: 'Legendary Shelby Cobra, powerful.', availability_start: start_date = Date.today + rand(1..60), availability_end: start_date + rand(30..90) }
-  ]
+  {
+    brand: 'Aston Martin',
+    model: 'DB7 coupé Zagato',
+    year: 2004,
+    price: 2800,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/421/10770421_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/421/10770421_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/421/10770421_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Experience the timeless elegance and power of the 2004 Aston Martin DB7 Coupé Zagato. This rare gem features a striking design by the renowned Italian coachbuilder Zagato, combining luxurious comfort with exceptional performance. With its powerful V12 engine, this Aston Martin delivers an exhilarating driving experience. Perfect for special occasions or simply enjoying a luxurious ride, the DB7 Zagato is a testament to the craftsmanship and prestige of the Aston Martin brand."
+    ]
+  },
+  {
+    brand: 'BMW',
+    model: '327/328 Cabriolet',
+    year: 1939,
+    price: 2600,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/481/10773481_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/481/10773481_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/481/10773481_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Step back in time with the 1939 BMW 327/328 Cabriolet, a classic convertible that exudes vintage charm and sophisticated style. This pre-war masterpiece features elegant lines and a powerful engine, making it a joy to drive and a delight to behold. Perfect for leisurely drives or making a grand entrance at events, the BMW 327/328 Cabriolet is a symbol of a bygone era of automotive excellence, where craftsmanship and design were paramount."
+    ]
+  },
+  {
+    brand: 'BMW',
+    model: '850 CSI',
+    year: 1993,
+    price: 800,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/228/10771228_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/228/10771228_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/228/10771228_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Drive the 1993 BMW 850 CSI, a sleek and stylish sports car that combines cutting-edge technology with unmatched performance. This model is renowned for its powerful V12 engine and dynamic handling, offering a thrilling ride for enthusiasts. The 850 CSI's design reflects BMW's commitment to luxury and innovation, making it a standout choice for those who seek both performance and sophistication in a classic sports car."
+    ]
+  },
+  {
+    brand: 'Alpine',
+    model: 'A110 1600S modifiée groupe 4',
+    year: 1970,
+    price: 1200,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/487/10771487_View.jpg",
+      "https://www.artcurial.com/item-images/FR/487/10771487_View%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/487/10771487_View%2003.jpg"
+    ],
+    descriptions: [
+      "Experience the thrill of the 1970 Alpine A110 1600S, a modified Group 4 rally legend known for its agility and speed. This iconic French sports car boasts a lightweight design and a powerful engine, making it a formidable competitor on the rally circuit. Perfect for enthusiasts who appreciate the heritage and performance of classic rally cars, the A110 1600S offers an exhilarating driving experience that is sure to impress."
+    ]
+  },
+  {
+    brand: 'Ford',
+    model: 'Mustang Cabriolet 302ci',
+    year: 1969,
+    price: 350,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/114/10772114_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/114/10772114_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/114/10772114_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Relive the golden era of American muscle cars with the 1969 Ford Mustang Cabriolet 302ci, a convertible that offers pure driving pleasure. Featuring the iconic Mustang design and a robust V8 engine, this classic car delivers both style and performance. Ideal for cruising on sunny days or making a statement at car shows, the Mustang Cabriolet 302ci is a timeless symbol of American automotive history and a joy for any car enthusiast to drive."
+    ]
+  },
+  {
+    brand: 'Jaguar',
+    model: 'Type E V12 Coupé',
+    year: 1970,
+    price: 350,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/113/10772113_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/113/10772113_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/113/10772113_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Enjoy the luxurious ride of the 1970 Jaguar Type E V12 Coupé, a classic that combines elegance, power, and a rich motoring heritage. Known for its stunning design and powerful V12 engine, the Type E is a beloved icon in the automotive world. Perfect for special occasions or simply indulging in a refined driving experience, the Jaguar Type E V12 Coupé offers unparalleled style and performance, making it a must-drive for any classic car enthusiast."
+    ]
+  },
+  {
+    brand: 'Maserati',
+    model: 'Ghibli 4,9L SS',
+    year: 1971,
+    price: 1600,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/459/10773459_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/459/10773459_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/459/10773459_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Feel the power and elegance of the 1971 Maserati Ghibli 4.9L SS, a sports car that delivers an exhilarating driving experience. With its striking design and formidable performance, the Ghibli SS stands out as one of Maserati's finest creations. This classic Italian sports car is perfect for those who appreciate a blend of luxury and speed, offering a ride that is as thrilling as it is stylish. Experience the heritage and craftsmanship of Maserati with this exceptional vehicle."
+    ]
+  },
+  {
+    brand: 'Porsche',
+    model: '993 Cup 3.8 RSR',
+    year: 1997,
+    price: 5750,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/509/10772509_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/509/10772509_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/509/10772509_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Race with the 1997 Porsche 993 Cup 3.8 RSR, a high-performance machine built for those who crave speed and precision. This track-focused Porsche is equipped with a powerful 3.8L engine and advanced racing technology, making it a formidable contender on the circuit. Perfect for track days or simply enjoying an adrenaline-fueled drive, the 993 Cup RSR is a testament to Porsche's engineering excellence and racing heritage."
+    ]
+  },
+  {
+    brand: 'Porsche',
+    model: '356 B 1600 Super Cabriolet',
+    year: 1963,
+    price: 130,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/235/10773235_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/235/10773235_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/235/10773235_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Cruise in style with the 1963 Porsche 356 B 1600 Super Cabriolet, a classic convertible that epitomizes elegance and charm. This beautiful vintage car offers a perfect blend of performance and aesthetic appeal, featuring a sleek design and a reliable engine. Ideal for leisurely drives or special occasions, the Porsche 356 B 1600 Super Cabriolet is a timeless classic that delivers a truly enjoyable driving experience."
+    ]
+  },
+  {
+    brand: 'Porsche',
+    model: '911 SC 3.0L Targa',
+    year: 1983,
+    price: 500,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/989/10771989_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/989/10771989_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/989/10771989_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Enjoy the open road in the 1983 Porsche 911 SC 3.0L Targa, a timeless sports car that offers an unforgettable driving experience. With its distinctive Targa design and powerful 3.0L engine, this Porsche delivers both style and performance. Whether you're cruising through scenic routes or participating in a classic car rally, the 911 SC Targa is a perfect choice for those who appreciate Porsche's legacy of engineering excellence and driving pleasure."
+    ]
+  },
+  {
+    brand: 'Ferrari',
+    model: '612 Scaglietti F1',
+    year: 2005,
+    price: 800,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/185/10773185_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/185/10773185_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/185/10773185_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Indulge in luxury with the 2005 Ferrari 612 Scaglietti F1, a grand tourer that combines performance, comfort, and elegance. This magnificent vehicle features a powerful V12 engine and an advanced F1 transmission, offering a driving experience that is both thrilling and refined. The 612 Scaglietti's spacious interior and sophisticated design make it perfect for long-distance journeys or simply enjoying a luxurious ride. Experience the pinnacle of Ferrari's craftsmanship with this stunning grand tourer."
+    ]
+  },
+  {
+    brand: 'Ferrari',
+    model: '250 GTE Série 3',
+    year: 1963,
+    price: 3400,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/228/10773228_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/228/10773228_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/228/10773228_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Experience the iconic 1963 Ferrari 250 GTE Série 3, a classic that embodies the heritage and passion of Ferrari. This elegant grand tourer features a powerful V12 engine and a beautifully crafted design, making it a joy to drive and a sight to behold. Perfect for special events or leisurely drives, the 250 GTE Série 3 offers a unique opportunity to experience the timeless allure of Ferrari's golden era. Relish in the luxury and performance of this automotive masterpiece."
+    ]
+  },
+  {
+    brand: 'Ferrari',
+    model: '348 Spider No reserve',
+    year: 1995,
+    price: 1100,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/428/10772428_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/428/10772428_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/428/10772428_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Drive the 1995 Ferrari 348 Spider, a convertible that offers an exhilarating blend of performance and Italian design. With its powerful V8 engine and sleek lines, this Ferrari delivers a thrilling driving experience. Perfect for sunny days and scenic drives, the 348 Spider combines the best of Ferrari's engineering and design, providing a ride that is both stylish and exciting. Enjoy the open-top freedom and dynamic performance of this iconic Ferrari."
+    ]
+  },
+  {
+    brand: 'Mercedes-Benz',
+    model: "300 SL 'Papillon'",
+    year: 1955,
+    price: 15000,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/560/10770560_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/560/10770560_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/560/10770560_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Rent the prestigious 1955 Mercedes-Benz 300 SL 'Papillon', an iconic classic known for its distinctive gullwing doors and unmatched elegance. This legendary sports car features a powerful engine and a sleek design, making it a standout in the world of classic cars. Perfect for special occasions or simply indulging in a luxurious drive, the 300 SL offers a unique blend of style, performance, and historical significance. Experience the timeless allure of one of Mercedes-Benz's most celebrated models."
+    ]
+  },
+  {
+    brand: 'Lamborghini',
+    model: '400 GT 2+2 par Touring',
+    year: 1966,
+    price: 4500,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/160/10773160_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/160/10773160_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/160/10773160_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Feel the power of the 1966 Lamborghini 400 GT 2+2, a classic that offers a perfect blend of performance and luxury. This elegant grand tourer features a powerful V12 engine and a beautifully crafted design by Touring, providing an exhilarating and refined driving experience. Ideal for long-distance journeys or making a grand entrance, the 400 GT 2+2 is a testament to Lamborghini's commitment to excellence and innovation in automotive design."
+    ]
+  },
+  {
+    brand: 'Lamborghini',
+    model: 'Jalpa P350 GT Bertone',
+    year: 1984,
+    price: 1200,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/163/10773163_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/163/10773163_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/163/10773163_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Drive the 1984 Lamborghini Jalpa P350 GT Bertone, a unique sports car that combines Italian design with thrilling performance. This rare model features a mid-engine V8 and distinctive styling by Bertone, offering a dynamic and engaging driving experience. Perfect for those who appreciate the bold and innovative spirit of Lamborghini, the Jalpa P350 GT Bertone provides a ride that is as exciting as it is stylish, making it a standout choice for any car enthusiast."
+    ]
+  },
+  {
+    brand: 'Volvo',
+    model: 'P1800',
+    year: 1964,
+    price: 500,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/611/10770611_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/611/10770611_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/611/10770611_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Enjoy the classic 1964 Volvo P1800, a stylish and reliable car that offers a comfortable and memorable driving experience. Known for its distinctive design and solid performance, the P1800 is a beloved classic that has stood the test of time. Perfect for leisurely drives or classic car events, this Volvo combines Scandinavian craftsmanship with timeless appeal, making it a delightful choice for anyone who appreciates vintage automobiles."
+    ]
+  },
+  {
+    brand: 'AC',
+    model: 'Aceca moteur Ford V8 260',
+    year: 1955,
+    price: 1200,
+    image_urls: [
+      "https://www.artcurial.com/item-images/FR/221/10772221_Vue.jpg",
+      "https://www.artcurial.com/item-images/FR/221/10772221_Vue%2002.jpg",
+      "https://www.artcurial.com/item-images/FR/221/10772221_Vue%2003.jpg"
+    ],
+    descriptions: [
+      "Experience the 1955 AC Aceca with a Ford V8 260 engine, a rare classic that combines British craftsmanship with American power. This unique coupe features elegant lines and a powerful V8 engine, offering a thrilling and refined driving experience. Perfect for collectors and enthusiasts, the AC Aceca stands out as a testament to the collaboration between British design and American muscle, providing a ride that is both stylish and exhilarating."
+    ]
+  },
+]
 
+offers.each_with_index do |offer, index|
+  new_offer = Offer.create!(
+    brand: offer[:brand],
+    model: offer[:model],
+    year: offer[:year],
+    price: offer[:price],
+    km: 30_000,
+    user: index < 11 ? User.second : User.first,
+    address: addresses[index],
+    availability_start: start_date = Date.today + rand(1..15),
+    availability_end: start_date + 45
+  )
 
-offers.each do |offer|
-  Offer.create!(offer)
+  offer[:image_urls].each do |image_url|
+    image_file = URI.open(image_url)
+
+    # Determine the file extension from the URL or default to .jpg
+    extension = File.extname(URI.parse(image_url).path).downcase
+    extension = '.jpg' if extension.empty? || extension == '.jpeg'
+
+    # Construct a filename for the attachment
+    filename = "#{offer[:brand]}-#{offer[:model]}-#{SecureRandom.hex(8)}#{extension}"
+
+    # Attach the image to the offer with the correct content type for JPEG
+    new_offer.photos.attach(io: image_file, filename: filename, content_type: "image/jpeg")  end
 end
