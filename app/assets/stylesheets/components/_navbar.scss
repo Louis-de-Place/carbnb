@@ -8,6 +8,19 @@
     align-items: center;
     flex-grow: 1;
     gap: 32px;
+    color: $main;
+  }
+
+  a {
+    color: $main;
+  }
+
+  a:hover {
+    color: $hover
+  }
+
+  .nav-link {
+    color: $main;
   }
 
   .navbar-logo img {
