@@ -1,6 +1,6 @@
 <div class="container-75">
   <div class="form-wrapper">
-    <h1 class="text-center bold">Post my car to rent</h1>
+    <h1 class="text-center fw-semibold">Rent my car</h1>
     <br>
     <%= simple_form_for @offer do |f| %>
       <div class="d-flex gap-4">
@@ -29,7 +29,7 @@
       <%= f.input :photos, as: :file, label: "Pictures of the car", input_html: { multiple: true, onchange: "previewImages(event)" } %>
       <div id="photos-preview" class="d-flex gap-4 flex-wrap mt-4"></div>
       <div class="d-flex justify-content-center">
-        <%= f.button :submit, "Post my car to rent", class: "button w-100" %>
+        <%= f.button :submit, "Rent my car", class: "button w-100" %>
       </div>
     <% end %>
   </div>
