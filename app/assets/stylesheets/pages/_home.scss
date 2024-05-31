@@ -1,19 +1,26 @@
 .logo {
   display: flex;
   justify-content: center;
-  margin: 10px 0;
+  margin: 2px 0;
 
   img {
-    height: 80px;
+    height: 70px;
   }
 }
 .carousel {
-  height: calc(100vh - 100px);
+  height: calc(95vh - 95px);
   .carousel-img {
     object-fit: cover;
     object-position: bottom;
   }
+.carousel-inner {
+  height: calc(95vh - 95px);
+  }
+
+.carousel-img {
+  height: calc(95vh - 95px);
+}
 }
 
-$carousel-transition-duration: 3.6s;
+$carousel-transition-duration: 5.6s;
 $carousel-transition: transform $carousel-transition-duration ease-in-out;
