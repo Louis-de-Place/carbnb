@@ -19,7 +19,7 @@
               <%= cl_image_tag(current_user.photo.attached? ? current_user.photo.key : "default_pfp", class: "avatar-large", crop: :fill) %>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><%= link_to "My Dashboard", "#", class: "dropdown-item" %></li>
+              <li><%= link_to "My Dashboard", dashboard_path, class: "dropdown-item" %></li>
               <li><%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %></li>
             </ul>
           </li>

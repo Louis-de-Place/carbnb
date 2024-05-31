@@ -12,8 +12,8 @@
     </label>
   </div>
   <%= form_with url: offers_path, method: :get, class:"filters" do %>
-    <%= select_tag :brand, options_for_select(Offer.all.sort_by(&:brand).pluck(:brand).uniq, params[:brand]), class:"form-select", include_blank: "Brand" %>
-    <%= select_tag :year, options_for_select(Offer.all.sort_by(&:year).pluck(:year).uniq, params[:year]), class:"form-select", include_blank: "Year" %>
+    <%= select_tag :brand, options_for_select(Offer.all.sort_by(&:brand).pluck(:brand).uniq, params[:brand]), class:"form-select bg-white", include_blank: "Brand" %>
+    <%= select_tag :year, options_for_select(Offer.all.sort_by(&:year).pluck(:year).uniq, params[:year]), class:"form-select bg-white", include_blank: "Year" %>
     <%= range_field_tag :price,
       params[:price],
       in: 100..20000,
@@ -26,7 +26,7 @@
       Price:
       <%= text_field_tag :price,
             params[:price],
-            class: "form-control",
+            class: "form-control bg-white",
             id: "value"
         %>
     </div>

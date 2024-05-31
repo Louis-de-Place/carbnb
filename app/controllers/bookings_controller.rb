@@ -18,6 +18,11 @@ class BookingsController < ApplicationController
     redirect_to offer_path(@booking.offer), status: :see_other
   end
 
+  def status_update
+    @booking = Booking.find(params[:id])
+    @booking.update(status: params[:status])
+  end
+
   private
 
   def booking_params

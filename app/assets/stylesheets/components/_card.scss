@@ -11,9 +11,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   height: 100%;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 
   &:hover {
     transform: translateY(-10px);
@@ -36,7 +34,8 @@
   flex: 0;
   padding: 16px 16px 0 16px;
 
-  .card-price {
+  .card-price,
+  .card-details {
     font-size: 14px;
   }
 
@@ -61,5 +60,18 @@
   .calendar-button {
     width: 100%;
     padding: 8px;
+  }
+}
+
+.dashboard-cards {
+  display: flex;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+
+  .card-body {
+    padding: 16px;
   }
 }
