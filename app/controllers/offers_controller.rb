@@ -22,6 +22,16 @@ class OffersController < ApplicationController
         to: booking.end_date
       }
     end
+    @bookings_dates.push(
+      {
+        from: "2000-01-01",
+        to: @offer.availability_start
+      },
+      {
+        from: @offer.availability_end,
+        to: "3000-01-01"
+      }
+    )
   end
 
   def new
