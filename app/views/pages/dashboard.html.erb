@@ -1,0 +1,117 @@
+<div class="container-75">
+  <div class=dashboard-container>
+  <div class="profile">
+    <div>
+      <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="100,200">
+        <%= cl_image_tag(current_user.photo.attached? ? current_user.photo.key : "default_pfp", class: "avatar-profile", crop: :fill) %>
+      </a>
+    </div>
+    <div class="profile-details">
+      <div class="w-100 d-flex justify-content-between">
+        <h5><%= current_user.first_name %> <%= current_user.last_name %></h5>
+        <div class="button">Edit</div>
+      </div>
+      <div class="opacity-75"><%= current_user.email %></div>
+      <div class="opacity-75"><%= current_user.birth_date %></div>
+    </div>
+  </div>
+  <div class="booking">
+    <div class="manage-cars" data-controller="toggle">
+      <div class="switch mb-4">
+        <input id="status"
+              type="checkbox"
+              name="status"
+              data-action="click->toggle#fire">
+        <label for="status">
+          <div class="status-switch"
+              data-unchecked="Rent"
+              data-checked="Cars">
+          </div>
+        </label>
+      </div>
+      <div class="profile-details gap-4" data-toggle-target="one">
+        <% if @offers_bookings.count === 0 %>
+          <p class="opacity-50">No booking requests for your cars.</p>
+        <% end %>
+        <% @offers_bookings.each do |ob| %>
+          <div class="dashboard-cards" data-controller="booking" data-booking-id-value="<%= ob.id %>">
+            <div class="image-container">
+              <% if ob.offer.photos.attached? %>
+                <%= cl_image_tag(ob.offer.photos.first.key) %>
+              <% else %>
+                <%= cl_image_tag("default_photo") %>
+              <% end %>
+            </div>
+            <div class="card-body flex-grow-1">
+              <div class="mb-2">
+                <div class="w-100 d-flex justify-content-between">
+                  <h6><%= ob.offer.brand %> - <%= ob.offer.model %></h6>
+                  <div class="<%= ob.status.nil? ? "pending" : (ob.status ? "accepted" : "declined") %>" data-booking-target="bookingStatus"></div>
+                </div>
+                <div class="card-details opacity-75 w-100 text-start"><%= ob.offer.user.first_name %> <%= ob.offer.user.last_name %></div>
+                <div class="card-details opacity-75 w-100 text-start"><%= ob.start_date %> - <%= ob.end_date %></div>
+              </div>
+              <% if ob.status.nil? %>
+                <div class="d-flex mb gap-2" data-booking-target="buttons">
+                  <%= link_to "Accept", status_update_path(ob, status: true), data: { turbo_method: :patch, action:"click->booking#accept" }, class:"button accept flex-grow-1" %>
+                  <%= link_to "Decline", status_update_path(ob, status: false), data: { turbo_method: :patch, action:"click->booking#decline" }, class:"button decline flex-grow-1" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="profile-details gap-4 disapear" data-toggle-target="two">
+        <% if @offers.count === 0 %>
+          <p class="opacity-50">You don't have cars you want to rent.</p>
+        <% end %>
+        <% @offers.each do |offer| %>
+          <div class="dashboard-cards">
+            <div class="image-container">
+              <% if offer.photos.attached? %>
+                <%= cl_image_tag(offer.photos.first.key) %>
+              <% else %>
+                <%= cl_image_tag("default_photo") %>
+              <% end %>
+            </div>
+            <div class="card-body flex-grow-1">
+              <div class="w-100 text-start"><h6><%= offer.brand %> - <%= offer.model %></h6></div>
+              <div class="card-details opacity-75 w-100 text-start"><%= offer.user.first_name %> <%= offer.user.last_name %></div>
+              <div class="card-details opacity-75 w-100 text-start"><%= offer.availability_start %> - <%= offer.availability_end %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="my-booking">
+      <h5 class="mb-4 mt-2 pt-1">My booking requests</h5>
+      <div class="profile-details gap-4" data-toggle-target="two">
+        <% if @booking_requests.count === 0 %>
+          <p class="opacity-50">You did not request any bookings.</p>
+        <% end %>
+        <% @booking_requests.each do |br| %>
+          <div class="dashboard-cards">
+            <div class="image-container" >
+              <% if br.offer.photos.attached? %>
+                <%= cl_image_tag(br.offer.photos.first.key) %>
+              <% else %>
+                <%= cl_image_tag("default_photo") %>
+              <% end %>
+            </div>
+            <div class="card-body flex-grow-1">
+              <div class="w-100 d-flex justify-content-between">
+                <h6><%= br.offer.brand %> - <%= br.offer.model %></h6>
+                <div class="<%= br.status.nil? ? "pending" : (br.status ? "accepted" : "declined") %>"></div>
+              </div>
+              <div class="card-details opacity-75 w-100 text-start"><%= br.offer.user.first_name %> <%= br.offer.user.last_name %></div>
+              <div class="card-details opacity-75 w-100 text-start"><%= br.start_date %> - <%= br.end_date %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</div>

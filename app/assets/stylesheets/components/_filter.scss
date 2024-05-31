@@ -13,62 +13,63 @@
       border-radius: 0.125rem;
     }
   }
+}
 
-  .switch {
-    width: 100%;
-    height: 36px;
-    input#status {
-      display: none;
+.switch {
+  width: 100%;
+  height: 36px;
+  input#status {
+    display: none;
 
-      + label {
-        height: 100%;
+    + label {
+      height: 100%;
+      width: 100%;
+      .status-switch {
+        cursor: pointer;
         width: 100%;
-        .status-switch {
-          cursor: pointer;
-          width: 100%;
-          height: 100%;
-          position: relative;
-          transition: all 0.5s ease;
-          border: solid 1px $gray-300;
+        height: 100%;
+        position: relative;
+        transition: all 0.5s ease;
+        border: solid 1px $gray-300;
+        border-radius: 8px;
+        background-color: $white;
+
+        &:before,
+        &:after {
           border-radius: 8px;
+          height: 100%;
+          width: 50%;
+          display: flex;
+          align-items: center;
+          position: absolute;
+          justify-content: center;
+          transition: all 0.3s ease;
+        }
 
-          &:before,
-          &:after {
-            border-radius: 8px;
-            height: 100%;
-            width: 50%;
-            display: flex;
-            align-items: center;
-            position: absolute;
-            justify-content: center;
-            transition: all 0.3s ease;
-          }
+        &:before {
+          background-color: $main;
+          color: white;
+          left: 0;
+          content: attr(data-unchecked);
+        }
 
-          &:before {
-            background-color: $main;
-            color: white;
-            left: 0;
-            content: attr(data-unchecked);
-          }
-
-          &:after {
-            right: 0;
-            content: attr(data-checked);
-          }
+        &:after {
+          right: 0;
+          content: attr(data-checked);
         }
       }
+    }
 
-      &:checked + label {
-        .status-switch {
-          &:after {
-            left: 0;
-            content: attr(data-unchecked);
-          }
+    &:checked + label {
+      .status-switch {
+        &:after {
+          left: 0;
+          content: attr(data-unchecked);
+        }
 
-          &:before {
-            left: 50%;
-            content: attr(data-checked);
-          }
+        &:before {
+          left: 50%;
+          content: attr(data-checked);
         }
       }
     }

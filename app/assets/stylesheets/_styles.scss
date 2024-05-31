@@ -40,6 +40,21 @@ body {
       color: $main;
       background-color: $hover;
     }
+    &.decline {
+      padding: 0.175rem 0.75rem;
+      background-color: #8b0000;
+      &:hover {
+        background-color: #ffcccb;
+      }
+    }
+
+    &.accept {
+      padding: 0.175rem 0.75rem;
+      background-color: green;
+      &:hover {
+        background-color: lightgreen;
+      }
+    }
   }
 }
 
