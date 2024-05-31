@@ -8,7 +8,7 @@
       <% end %>
     </div>
     <div class="card-body">
-      <p class="card-title justify-content"><%= offer.brand %> - <%= offer.model %></p>
+      <h5 class="card-title justify-content"><%= offer.brand %> - <%= offer.model %></h5>
       <div class="card-info d-flex justify-content-between">
         <p class="card-price">$<%= offer.price %>/day</p>
         <% if offer.reviews.count > 0 %>

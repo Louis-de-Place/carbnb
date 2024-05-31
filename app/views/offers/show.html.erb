@@ -40,7 +40,7 @@
     <div class="col">
       <div class="calendar-card">
         <div class="d-flex align-items-center gap-1">
-          <h4 id="price"><%= @offer.price %></h4><h4>$ </h4><h6>per day</h6>
+          <h4 id="price"><%= @offer.price %></h4><h4>$ </h4><p class="mb-2">per day</p>
         </div>
         <div class="mb-4">
           <%= render "offers/calendar_form" %>
@@ -64,8 +64,11 @@
                 <i class="fa-solid fa-star"></i>
               <% end %>
             </div>
-            <%= r.content %>
+            <p><%= r.content %></p>
           </li>
+        <% end %>
+        <% if @offer.reviews.count === 0 %>
+          <p class="opacity-50">No reviews for this car yet.</p>
         <% end %>
       </ul>
     </div>
