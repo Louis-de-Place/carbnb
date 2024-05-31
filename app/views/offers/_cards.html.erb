@@ -24,3 +24,6 @@
     <% end %>
   <% end %>
 </div>
+<% if @offers.count === 0 %>
+  <p class="opacity-50">No cars found matching your filters.</p>
+<% end %>
